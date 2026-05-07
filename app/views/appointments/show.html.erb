@@ -3,20 +3,39 @@
   <%= link_to 'New Treatment', new_appointment_treatment_path(@appointment), class: "btn btn-success" %>
 </div>
 
-<table class="table mt-2">
-  <thead>
+<table class="table mt-3 align-middle">
+  <thead class="table-light">
     <tr>
-      <th>Description</th>
-      <th>Actions</th>
+      <th>Treatment Details</th>
+      <th style="width: 200px;">Actions</th>
     </tr>
   </thead>
   <tbody>
     <% @appointment.treatments.each do |t| %>
       <tr>
-        <td><%= t.description %></td>
         <td>
-          <%= link_to 'Edit', edit_appointment_treatment_path(@appointment, t), class: "btn btn-sm btn-warning" %>
-          <%= button_to 'Delete', appointment_treatment_path(@appointment, t), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "btn btn-sm btn-danger d-inline" %>
+          <div class="fw-bold text-primary"><%= t.description %></div>
+          
+          <% if t.clinical_notes.present? %>
+            <div class="mt-2 p-2 bg-light border-start border-4 rounded-end small shadow-sm">
+              <div class="text-muted mb-1"><i class="bi bi-file-earmark-text"></i> Clinical Notes:</div>
+              <div class="trix-content">
+                <%= t.clinical_notes %>
+              </div>
+            </div>
+          <% else %>
+            <span class="text-muted small"><em>No notes provided.</em></span>
+          <% end %>
+        </td>
+        
+        <td>
+          <div class="d-flex gap-1">
+            <%= link_to 'Edit', edit_appointment_treatment_path(@appointment, t), class: "btn btn-sm btn-warning" %>
+            <%= button_to 'Delete', appointment_treatment_path(@appointment, t), 
+                          method: :delete, 
+                          data: { turbo_confirm: "Are you sure?" }, 
+                          class: "btn btn-sm btn-danger" %>
+          </div>
         </td>
       </tr>
     <% end %>

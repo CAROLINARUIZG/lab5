@@ -41,6 +41,6 @@ class TreatmentsController < ApplicationController
   end
 
   def treatment_params
-    params.require(:treatment).permit(:description, :administered_at, :notes)
+    params.expect(treatment: [ :appointment_id, :description, :cost, :clinical_notes ])
   end
 end

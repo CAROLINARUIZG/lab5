@@ -4,8 +4,10 @@ class AppointmentsController < ApplicationController
   end
 
   def show
-    @appointment = Appointment.find(params[:id])
+    @appointment = Appointment.includes(treatments: :rich_text_clinical_notes).find(params[:id])
   end
+
+  private
 
   def appointment_params
     params.require(:appointment).permit(:pet_id, :vet_id, :status, :appointment_date, :reason)

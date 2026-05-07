@@ -14,6 +14,14 @@ p3 = o2.pets.create(name: "Zanahoria", species: "Rabbit", breed: "Cabeza de Leó
 p4 = o3.pets.create(name: "Bimbo", species: "Dog", breed: "Pastor Alemán", date_of_birth: "2019-09-19", weight: 30.0)
 p5 = o3.pets.create(name: "Garfield", species: "Cat", breed: "Exótico de Pelo Corto", date_of_birth: "2008-08-18", weight: 3.5)
 
+begin
+  p1.photo.attach(io: File.open(Rails.root.join('db/seeds/pets/dog.jpg')), filename: 'dog.jpg', content_type: 'image/jpeg')
+  p2.photo.attach(io: File.open(Rails.root.join('db/seeds/pets/cat.jpg')), filename: 'cat.jpg', content_type: 'image/jpeg')
+  p3.photo.attach(io: File.open(Rails.root.join('db/seeds/pets/bird.jpg')), filename: 'bird.jpg', content_type: 'image/jpeg')
+rescue Errno::ENOENT
+  puts "No se encontraron las imágenes en db/seeds/pets/."
+end
+
 v1 = Vet.create(first_name: "Maria", last_name: "Correa", email: "maria.correa.vet@clinic.com", specialization: "Cirugía")
 v2 = Vet.create(first_name: "Sebastian", last_name: "Ruiz", email: "sebastian.ruiz.vet@clinic.com", specialization: "Medicina General")
 

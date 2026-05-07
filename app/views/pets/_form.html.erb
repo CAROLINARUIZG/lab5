@@ -26,5 +26,19 @@
     <%= f.number_field :weight, step: :any, class: "form-control" %>
   </div>
 
+  <div class="mb-3">
+    <%= f.label :photo, "Profile Photo", class: "form-label" %>
+
+    <% if pet.photo.attached? && pet.persisted? %>
+      <div class="mb-2">
+        <span class="d-block small text-muted mb-1">Current photo:</span>
+        <%= image_tag pet.photo, style: "width: 100px;", class: "img-thumbnail" %>
+      </div>
+    <% end %>
+
+    <%= f.file_field :photo, class: "form-control" %>
+    <div class="form-text">Accepted formats: JPEG, PNG, WebP. Max size: 5MB.</div>
+  </div>
+
   <%= f.submit class: "btn btn-primary" %>
 <% end %>

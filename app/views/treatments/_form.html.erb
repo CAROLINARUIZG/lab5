@@ -12,8 +12,8 @@
   </div>
 
   <div class="mb-3">
-    <%= f.label :notes, class: "form-label" %>
-    <%= f.text_area :notes, class: "form-control", rows: 3 %>
+    <%= f.label :clinical_notes, "Clinical Notes (Rich Text)", class: "form-label" %>
+    <%= f.rich_text_area :clinical_notes, class: "form-control" %>
   </div>
 
   <%= f.submit "Save Treatment", class: "btn btn-primary" %>

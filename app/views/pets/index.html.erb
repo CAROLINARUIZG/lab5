@@ -1,21 +1,34 @@
-<h1 class="my-4">Mascotas</h1>
-<table class="table table-striped table-hover border shadow-sm">
+<h1 class="my-4">Pets</h1>
+
+<table class="table table-striped table-hover border shadow-sm align-middle">
   <thead class="table-dark">
     <tr>
-      <th>Nombre</th>
-      <th>Especie</th>
-      <th>Raza</th>
-      <th>Dueño</th>
-      <th>Fecha de Nacimiento</th>
+      <th>Photo</th>
+      <th>Name</th>
+      <th>Species</th>
+      <th>Breed</th>
+      <th>Owner</th>
+      <th>Birth Date</th>
     </tr>
   </thead>
   <tbody>
     <% @pets.each do |pet| %>
       <tr>
+        <td>
+          <% if pet.photo.attached? %>
+            <%= image_tag pet.photo.variant(resize_to_fill: [60, 60]), class: "rounded shadow-sm border" %>
+          <% else %>
+            <div class="bg-light border rounded d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+              <span class="text-muted" style="font-size: 0.7rem;">No photo</span>
+            </div>
+          <% end %>
+        </td>
+        
         <td><%= link_to pet.name, pet_path(pet), class: "fw-bold text-decoration-none" %></td>
         <td><%= pet.species %></td>
         <td><%= pet.breed %></td>
         <td><%= pet.owner.first_name %> <%= pet.owner.last_name %></td>
+        
         <td><%= pet.birth_date.strftime("%B %d, %Y") %></td>
       </tr>
     <% end %>
